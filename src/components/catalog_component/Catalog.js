@@ -1,21 +1,63 @@
 import React, { Component } from 'react';
-import './Catalog.css';
+import CatalogTemplate from './CatalogTemplate'; 
+import axios from 'axios';
+// import Navbar from './components/Navbar';
 
 class Catalog extends Component {
 
-  render() {
-    return(
-      <div>Catalog</div>
-      // <div className="col-3 card" style={{width:"18rem"}}>
-      //   <img className="card-img-top" src="https://picsum.photos/420/320?random" alt="Card image cap"/>
-      //   <div className="card-body">
-      //       <h5 className="card-title">{this.props.nombre}</h5>
-      //       <p className="card-text">{this.props.apellidos}</p>
-      //       <p className="card-text">{this.props.edad}</p>
-      //       <a href="#" className="btn btn-primary">Go somewhere</a>
-      //   </div>
-      // </div>
+  constructor() {
+    super();
+    this.state = {
+      peliculas:[]
+    }
+  }
 
+  componentDidMount() {
+    axios.get('https://booksapiappv1.herokuapp.com/api/v1/peliculas/')
+    .then(response => {
+      this.setState({ //siempre que se cambia el estado se vuelve a renderear
+        peliculas:response.data
+      })
+    })
+    .catch(err => console.log(err))
+  }
+  
+  updateCardPelicula() {
+    if (this.state.peliculas.length == 0) {
+      return <div>Cargando...</div>
+    } else {
+      return this.state.peliculas.map(element => {
+        return <CatalogTemplate 
+        _id={element._id}
+        nombre={element.nombre}
+        anio={element.anio}
+        clasificacion={element.clasificacion}
+        duracion={element.duracion}
+        genero={element.genero}
+        portada={element.portada}
+        video={element.video}
+        director={element.director}
+        sinopsis={element.sinopsis}
+        premios={element.premios}
+        actores={element.actores}
+        />
+      })
+    }
+  }
+
+  render() {
+    console.log('Me ejecuté render')
+    return (
+      
+      // <Navbar/>
+
+      <div className="home">
+        <div className="container">
+          <div className="row">
+          {this.updateCardPelicula()}
+          </div>
+        </div>
+      </div>
     );
   }
 }

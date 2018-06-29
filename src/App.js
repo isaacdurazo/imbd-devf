@@ -10,12 +10,13 @@ import {BrowserRouter, Route} from 'react-router-dom';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter> 
+      <BrowserRouter>
+         
         <main>
           <Route exact path="/" component={Catalog}/>
           <Route exact path="/movie" component={Movie}/>
           <Route exact path="/create-movie" component={MovieCreate}/>
-          <Route exact path="/review-movie" component={MovieReview}/>
+          <Route exact path="/review-movie/:uid" component={MovieReview}/>
         </main>
       </BrowserRouter>
       

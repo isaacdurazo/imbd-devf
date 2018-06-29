@@ -1,0 +1,18 @@
+.portada_wrapper {
+  overflow: auto;
+  background: black;
+  padding: 1em;
+}
+
+.portada_wrapper .portada {
+  float: left;
+  width: 30%;
+}
+
+.portada_wrapper .portada img {
+  width: 100%;
+}
+
+.info_wrapper {
+  clear: both;
+}
