@@ -6,48 +6,40 @@ import { Link } from 'react-router-dom';
 class CatalogTemplate extends Component {
 
   constructor(props){
+    console.log(props)
     super(props);
   }
 
   render(){
     return (
-      <div className="col-6 card" style={{width:"18rem"}}>
-        <div className="card-body">
-
-          <div className="title_block">
-            <div className="title_wrapper">
-              <h1 className="nombre">{this.props.nombre}
-                <span className="anio">{this.props.anio}</span>            
-              </h1>
-              <div className="subtext">
-                <span className="clasificacion">Clasificación: {this.props.clasificacion}</span>
-                <span className="duracion">Duración: {this.props.duracion}</span>
-                <span className="genero" >Genero: {this.props.genero}</span>
-              </div>
+      <div className="example-2 card">
+        <div className="wrapper" style={{backgroundImage: "url(" + this.props.portada + ")"}} >
+          <div className="header">
+            <div className="date">
+              {/* <span className="day">12</span>
+              <span className="month">Aug</span> */}
+              <span className="year">{this.props.anio}</span>
+            </div>
+            <ul className="menu-content">
+              <li>
+                <a href="#" className="fa fa-bookmark-o"></a>
+              </li>
+              <li><a href="#" className="fa fa-heart-o"><span>18</span></a></li>
+              <li><a href="#" className="fa fa-comment-o"><span>3</span></a></li>
+            </ul>
+          </div>
+          <div className="data">
+            <div className="content">
+              <span className="author">{this.props.director}</span>
+              <h1 className="title"><a href="#">{this.props.nombre}</a></h1>
+              <p className="text">{this.props.sinopsis}</p>
+              
+              <a href="#" className="button"><Link to={'/review-movie/'+ this.props._id}>Leer mas</Link></a>
             </div>
           </div>
-
-          <div className="portada_wrapper">
-            <div className="portada">
-              <img src={this.props.portada}/>
-            </div> 
-            <div className="video">
-              <iframe src={`https://www.youtube.com/embed/${this.props.video}`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div> 
-          </div>
-
-          <div className="info_wrapper">
-            <div className="director_wrapper">Director: {this.props.director}</div>
-            <div className="sinopsis">Sinopsis: {this.props.sinopsis}</div>
-            <div className="premios">Premios: {this.props.premios}</div>
-            <div className="actores_wrapper">
-              <span className="actor">Actores: {this.props.actores}</span>
-            </div>
-          </div>
-
-          <Link className="btn btn-primary" to={`/review-movie/${this.props._id}`}>Criticar Película</Link>
         </div>
       </div>
+
     );
   }
 }
