@@ -75,6 +75,17 @@ class MovieReviewTemplate extends Component {
     })
   }
 
+  updateMovieData(){
+    if(this.state.pelicula._id == undefined){
+      return <div>Cargando</div>
+    }
+    else{
+      
+      let movieDataTemplate = this.getMovieDataTemplate();
+      return movieDataTemplate;
+    }
+  }
+  
   updateComentarios(){
     if(this.state.pelicula._id == undefined){
       return <div>Cargando</div>
@@ -99,6 +110,30 @@ class MovieReviewTemplate extends Component {
   
   clearFormComentario(){
     document.getElementById("form_comentario").reset();
+  }
+
+  getMovieDataTemplate(){
+    let movieDataTemplate =
+    <div class="container">
+   <div class="row panel-white">
+    <div class="col-sm-6">
+        <h4><b>{this.state.pelicula.nombre}</b> </h4>
+        <img style={{height:"auto",width:100+"%"}} src={this.state.pelicula.portada}/>
+    </div>
+    <div class="col-sm-6">
+    <h5 style={{textAlign:'center'}}><b>Trailer</b> </h5>
+          <iframe width="100%" height="200px" src={"https://www.youtube.com/embed/"+this.state.pelicula.video} frameborder="0" allowfullscreen></iframe>
+          <p><b>Año: </b>{this.state.pelicula.anio} </p>
+          <p><b>Duración: </b>{this.state.pelicula.duracion} min</p>
+          <p><b>Genero: </b>{this.state.pelicula.genero} </p>
+          <p><b>Clasificación: </b>{this.state.pelicula.clasificacion}</p>
+          <p><b>Director: </b>{this.state.pelicula.director} </p>
+          <p><b>Actores: </b>{this.state.pelicula.actores} </p>
+          <p><b>Sinopsis: </b>{this.state.pelicula.sinopsis} </p>
+    </div>
+    </div>
+    </div>
+    return movieDataTemplate;
   }
 
   getFormComentario(){
@@ -143,7 +178,7 @@ class MovieReviewTemplate extends Component {
                         </div>
                         <div class="pull-left meta">
                             <div class="title h5">
-                                <a href="#"><b>{elem.critico}</b></a>
+                                <a href="#"><b>{elem.critico+"    "} </b></a>
                                 made a post.
                             </div>
                             <h6 class="text-muted time">1 minute ago</h6>
@@ -175,6 +210,9 @@ class MovieReviewTemplate extends Component {
     return (
 
         <div class="container">
+            <div class="row">
+              {this.updateMovieData()}
+            </div>        
             <div class="row">
               {this.updateFormComentario()}
             </div>

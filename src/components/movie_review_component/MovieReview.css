@@ -4,6 +4,8 @@
 .panel-white {
   border: 1px solid #dddddd;
   margin: 1em auto;
+  background: #e0e0e0;
+  padding: 2em;
 }
 .panel-white  .panel-heading {
   color: #333;
