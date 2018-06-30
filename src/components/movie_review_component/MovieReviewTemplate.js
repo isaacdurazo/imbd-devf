@@ -75,6 +75,20 @@ class MovieReviewTemplate extends Component {
     })
   }
 
+  getCriticoName(id){
+    axios.get(`https://booksapiappv1.herokuapp.com/api/v1/criticos/${id}`)
+    .then(critico => {
+      console.log(id,critico.data.nombre)
+      let criticoName = critico.data.nombre + " " + critico.data.apellidos;
+      console.log(criticoName)
+      return criticoName;
+    })
+    .catch(error => {
+      return "Anonimo";
+      console.log(error);
+    })
+  }
+
   updateMovieData(){
     if(this.state.pelicula._id == undefined){
       return <div>Cargando</div>
@@ -178,7 +192,7 @@ class MovieReviewTemplate extends Component {
                         </div>
                         <div class="pull-left meta">
                             <div class="title h5">
-                                <a href="#"><b>{elem.critico+"    "} </b></a>
+                                <a href="#"><b>{elem.critico +"    "}</b></a>
                                 made a post.
                             </div>
                             <h6 class="text-muted time">1 minute ago</h6>
